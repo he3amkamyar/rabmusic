@@ -63,9 +63,14 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
-                        <a href="index.php?singer=omidjahan" class="list-group-item"><span class="badge">5</span>امید جهان</a>
-                        <a href="index.php?singer=aminhabibi" class="list-group-item"><span class="badge">3</span>امین حبیبی</a>
-                        <a href="index.php?singer=hamedpahlan" class="list-group-item"><span class="badge">8</span>حامد پهلان</a>
+                        <?php
+                        $conn = mysqli_connect("$host","$user","$pass","$db");
+                        $sql = "SELECT * FROM singers";
+                        $query = mysqli_query($conn,$sql);
+                        while ($row = mysqli_fetch_array($query)):
+                        ?>
+                        <a href="index.php?singer=<?php echo $row['sname'];?>" class="list-group-item"><span class="badge">5</span><?php echo $row['sname'];?></a>
+                        <?php endwhile;?>
                     </div>
                 </div>
             </div>
@@ -91,7 +96,7 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                         <audio class="col-sm-12" id="audio" controls src="<?php echo 'musics/'.$row['mmusic'];?>"></audio>
                     </p>
                     <p class="col-sm-12">
-                        <a href="musics/audio1.mp3">
+                        <a download="" href="<?php echo 'musics/'.$row['mmusic'];?>">
                             <button id="btn-download" class="btn btn-danger btn-lg col-sm-12" type="button"> دانلود آهنگ  <?php echo $row['mname'];?> - <?php echo $row['msinger'];?></button>
                         </a>
                     </p>
