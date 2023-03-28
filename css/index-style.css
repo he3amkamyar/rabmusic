@@ -1,0 +1,19 @@
+
+#list-singers
+{
+    padding: 10px;
+}
+#audio
+{
+    height: 100px;
+    width: 100%;
+}
+#img-music
+{
+    height: 450px;
+    width: 700px;
+}
+#btn-download
+{
+    width: 100%;
+}
