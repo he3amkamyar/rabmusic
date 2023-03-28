@@ -1,4 +1,5 @@
 <?php
+session_start();
 include ('config/config.php');
 $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 ?>
@@ -60,16 +61,20 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                         <span class="glyphicon glyphicon-user"></span>
                         لیست خوانندگان
                     </h3>
-                </div>
-                <div class="panel-body">
+                </div>                <div class="panel-body">
                     <div class="list-group">
                         <?php
+                        @$singer = $_GET['singer'];
+                        @$musicname = $_GET['name'];
                         $conn = mysqli_connect("$host","$user","$pass","$db");
-                        $sql = "SELECT * FROM singers";
+                        $sql = "SELECT DISTINCT msinger FROM music";;
                         $query = mysqli_query($conn,$sql);
                         while ($row = mysqli_fetch_array($query)):
                         ?>
-                        <a href="index.php?singer=<?php echo $row['sname'];?>" class="list-group-item"><span class="badge">5</span><?php echo $row['sname'];?></a>
+                        <a href="index.php?singer=<?php echo $row['msinger'];?>" class="list-group-item">
+                            <span class="badge">5</span></span>
+                            <?php echo $row['msinger'];?>
+                        </a>
                         <?php endwhile;?>
                     </div>
                 </div>
@@ -80,7 +85,15 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                 </div>
                 <?php
                 $conn = mysqli_connect("$host","$user","$pass","$db");
-                $sql = "SELECT * FROM music";
+                if(!isset($_GET['singer']))
+                {
+                    $sql = "SELECT * FROM music";
+                }
+                else
+                {
+
+                    $sql = "SELECT * FROM music WHERE msinger = '$singer'";
+                }
                 $query = mysqli_query($conn,$sql);
                 while($row = mysqli_fetch_array($query)):
                 ?>
@@ -112,9 +125,16 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                 </div>
                 <div class="panel-body">
                     <div class="list-group">
-                        <a href="#" class="list-group-item"> دانلود آهنگ امین حبیبی عاشق نشو <span class="label label-default"> New </span></a>
-                        <a href="#" class="list-group-item"> دانلود آهنگ شاد حامد پهلان همینو میخواستی <span class="label label-default"> New </span></a>
-                        <a href="#" class="list-group-item"> دانلود آهنگ امین حبیبی کابوس <span class="label label-default"> New </span> </a>
+                        <?php
+                        $conn = mysqli_connect("$host","$user","$pass","$db");
+                            $sql = "SELECT mname FROM music";
+                        $query = mysqli_query($conn,$sql);
+                        while ($row1 = mysqli_fetch_array($query)):
+                        ?>
+                        <a href="musics.php?name=<?php echo $row1['mname'];?>" class="list-group-item"><?php echo $row1['mname'];?>
+                            <span class="label label-default"> New </span>
+                        </a>
+                    <?php endwhile; ?>
                     </div>
                 </div>
             </div>
