@@ -61,13 +61,13 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                         <span class="glyphicon glyphicon-user"></span>
                         لیست خوانندگان
                     </h3>
-                </div>                <div class="panel-body">
+                 <div class="panel-body">
                     <div class="list-group">
                         <?php
                         @$singer = $_GET['singer'];
                         @$musicname = $_GET['name'];
                         $conn = mysqli_connect("$host","$user","$pass","$db");
-                        $sql = "SELECT DISTINCT msinger FROM music";;
+                        $sql = "SELECT DISTINCT msinger FROM music";// beray nemayesh nadaden tekrari ha
                         $query = mysqli_query($conn,$sql);
                         while ($row = mysqli_fetch_array($query)):
                         ?>
@@ -79,6 +79,8 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                     </div>
                 </div>
             </div>
+            </div>
+        </div>
             <div class="panel panel-default col-sm-6">
                 <div class="panel-heading">
                     <h1 id="list-singers" class="text-center"><b>راب موزیک</b> | دانلود جدید ترین اهنگ های روز دنیا</h1>
