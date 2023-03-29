@@ -67,7 +67,7 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                         @$singer = $_GET['singer'];
                         @$musicname = $_GET['name'];
                         $conn = mysqli_connect("$host","$user","$pass","$db");
-                        $sql = "SELECT msinger FROM music";
+                        $sql = "SELECT DISTINCT msinger FROM music";
                         $query = mysqli_query($conn,$sql);
                         while ($row = mysqli_fetch_array($query)):
                         ?>

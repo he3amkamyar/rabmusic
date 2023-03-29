@@ -11,6 +11,7 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>راب موزیک | دانلود اهنگ ،اهنگ شاد،اهنگ خارجی،اهنگ عروسی،اهنگ ایرانی،دانلود اهنگ شاد</title>
     <meta property="og:title" content=" موزیک جدید، دانلود موزیک ،اهنگ شاد،موزیک خارجی،آهنگ عروسی،اهنگ ایرانی،دانلود آهنگ شاد عروسی" />
+    <meta property="og:keywords" content=" موزیک جدید، دانلود موزیک ،اهنگ شاد،موزیک خارجی،آهنگ عروسی،اهنگ ایرانی،دانلود آهنگ شاد عروسی" />
     <meta property="og:description" content="دانلود جدید ترین اهنگ های روز دنیا" />
     <meta property="og:url" content="<?php echo $url; ?>" />
     <meta property="og:locale" content="fa" />
@@ -61,26 +62,24 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                         <span class="glyphicon glyphicon-user"></span>
                         لیست خوانندگان
                     </h3>
-                 <div class="panel-body">
+                </div>                <div class="panel-body">
                     <div class="list-group">
                         <?php
                         @$singer = $_GET['singer'];
                         @$musicname = $_GET['name'];
                         $conn = mysqli_connect("$host","$user","$pass","$db");
-                        $sql = "SELECT DISTINCT msinger FROM music";// beray nemayesh nadaden tekrari ha
+                        $sql = "SELECT DISTINCT msinger FROM music";
                         $query = mysqli_query($conn,$sql);
                         while ($row = mysqli_fetch_array($query)):
                         ?>
                         <a href="index.php?singer=<?php echo $row['msinger'];?>" class="list-group-item">
-                            <span class="badge">5</span></span>
+                            <span class="badge">2</span></span>
                             <?php echo $row['msinger'];?>
                         </a>
                         <?php endwhile;?>
                     </div>
                 </div>
             </div>
-            </div>
-        </div>
             <div class="panel panel-default col-sm-6">
                 <div class="panel-heading">
                     <h1 id="list-singers" class="text-center"><b>راب موزیک</b> | دانلود جدید ترین اهنگ های روز دنیا</h1>
