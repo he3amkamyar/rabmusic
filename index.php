@@ -7,7 +7,7 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 <html dir="rtl" lang="fa">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>راب موزیک | دانلود اهنگ ،اهنگ شاد،اهنگ خارجی،اهنگ عروسی،اهنگ ایرانی،دانلود اهنگ شاد</title>
     <meta property="og:title" content=" موزیک جدید، دانلود موزیک ،اهنگ شاد،موزیک خارجی،آهنگ عروسی،اهنگ ایرانی،دانلود آهنگ شاد عروسی" />
@@ -20,6 +20,24 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     <link rel="stylesheet" href="css/index-style.css"/>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
+    <style>
+        #sing
+        {
+            display: none;
+        }
+        @media only screen and (max-width : 769px)
+        {
+            #singer {
+                display: none;
+            }
+        }
+        @media only screen and (max-width: 768px){
+            #sing
+            {
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid">
@@ -56,7 +74,7 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
             </nav>
         </div>
         <div class="row">
-            <div class="panel panel-default col-sm-3">
+            <div class="panel panel-default col-sm-3" id="singer">
                 <div class="panel-heading">
                     <h3 id="new-musics" class="text-center">
                         <span class="glyphicon glyphicon-user"></span>
@@ -136,6 +154,30 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                             <span class="label label-default"> New </span>
                         </a>
                     <?php endwhile; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default col-sm-3" id="sing"">
+                <div class="panel-heading">
+                    <h3 id="new-musics" class="text-center">
+                        <span class="glyphicon glyphicon-user"></span>
+                        لیست خوانندگان
+                    </h3>
+                </div>                <div class="panel-body">
+                    <div class="list-group">
+                        <?php
+                        @$singer = $_GET['singer'];
+                        @$musicname = $_GET['name'];
+                        $conn = mysqli_connect("$host","$user","$pass","$db");
+                        $sql = "SELECT DISTINCT msinger FROM music";
+                        $query = mysqli_query($conn,$sql);
+                        while ($row = mysqli_fetch_array($query)):
+                            ?>
+                            <a href="index.php?singer=<?php echo $row['msinger'];?>" class="list-group-item">
+                                <span class="badge">2</span></span>
+                                <?php echo $row['msinger'];?>
+                            </a>
+                        <?php endwhile;?>
                     </div>
                 </div>
             </div>
