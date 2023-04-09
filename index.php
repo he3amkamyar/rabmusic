@@ -82,6 +82,7 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                     </h3>
                 </div>                <div class="panel-body">
                     <div class="list-group">
+
                         <?php
                         @$singer = $_GET['singer'];
                         @$musicname = $_GET['name'];
