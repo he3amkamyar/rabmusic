@@ -84,15 +84,20 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                     <div class="list-group">
 
                         <?php
+                        $conn = mysqli_connect("$host","$user","$pass","$db");
                         @$singer = $_GET['singer'];
                         @$musicname = $_GET['name'];
-                        $conn = mysqli_connect("$host","$user","$pass","$db");
                         $sql = "SELECT DISTINCT msinger FROM music";
                         $query = mysqli_query($conn,$sql);
                         while ($row = mysqli_fetch_array($query)):
-                        ?>
+                            ?>
+                        <?php
+                            $r = $row['msinger'];
+                            $sql_new = "SELECT COUNT(msinger) FROM music where msinger = '$r'";
+                            $query_new = mysqli_query($conn,$sql_new);
+                            while($new_row = mysqli_fetch_array($query_new)):?>
                         <a href="index.php?singer=<?php echo $row['msinger'];?>" class="list-group-item">
-                            <span class="badge">2</span></span>
+                            <span class="badge"><?php echo $new_row[0];endwhile;?></span>
                             <?php echo $row['msinger'];?>
                         </a>
                         <?php endwhile;?>
@@ -147,12 +152,12 @@ $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
                     <div class="list-group">
                         <?php
                         $conn = mysqli_connect("$host","$user","$pass","$db");
-                            $sql = "SELECT mname FROM music";
+                            $sql = "SELECT * FROM music";
                         $query = mysqli_query($conn,$sql);
                         while ($row1 = mysqli_fetch_array($query)):
                         ?>
                         <a href="musics.php?name=<?php echo $row1['mname'];?>" class="list-group-item"><?php echo $row1['mname'];?>
-                            <span class="label label-default"> New </span>
+                            <span class="label label-default"> <?php echo $row1['myear'];?> </span>
                         </a>
                     <?php endwhile; ?>
                     </div>
